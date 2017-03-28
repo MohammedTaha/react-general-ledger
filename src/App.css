@@ -1,4 +1,5 @@
 @import "../node_modules/font-awesome/css/font-awesome.min.css";
+@import "../node_modules/animate.css/animate.min.css";
 
 body{
     margin: 0;
@@ -6,10 +7,58 @@ body{
 }
 
 .AppBar{
-background: #28343b;
-background: -moz-linear-gradient(45deg, #28343b 0%, #28343b 0%, #828c95 36%, #b5bdc8 99%);
-background: -webkit-linear-gradient(45deg, #28343b 0%,#28343b 0%,#828c95 36%,#b5bdc8 99%);
-background: linear-gradient(45deg, #28343b 0%,#28343b 0%,#828c95 36%,#b5bdc8 99%);
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#28343b', endColorstr='#b5bdc8',GradientType=1 );
+    background: #28343b;
+    background: -moz-linear-gradient(45deg, #28343b 0%, #28343b 0%, #828c95 36%, #b5bdc8 99%);
+    background: -webkit-linear-gradient(45deg, #28343b 0%,#28343b 0%,#828c95 36%,#b5bdc8 99%);
+    background: linear-gradient(45deg, #28343b 0%,#28343b 0%,#828c95 36%,#b5bdc8 99%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#28343b', endColorstr='#b5bdc8',GradientType=1 );
 
+}
+
+.homePage .hero-01{
+    background: url('../public/imgs/hero-04.jpg') no-repeat ;
+    background-size: cover ;
+    height: 800px; 
+    background-attachment: fixed;
+}
+.homePage .containerAppIntro{
+    padding-top: 10em;
+}
+.homePage .articleAppIntro{
+    width: 60em;
+    margin: auto;
+    background-color: rgba(255,255,255,0.8) !important;
+    padding: 0.75em;
+    border-radius: 0.25em !important;
+}
+.homePage .appName{
+    font-size: 2em;
+    margin: 0.25em 0;
+}
+.homePage .paraAppIntro{
+    word-spacing: 0.25em !important;
+    font-size: 1.3em;
+    text-align: justify;
+}
+.homePage .container_credits{
+    background: url('../public/imgs/hero-02.jpg') no-repeat;
+    background-origin: border-box;
+    background-size: cover ;
+    background-attachment: fixed;
+}
+.homePage .container_keyFeatures{
+    text-align: center;
+    background: url('../public/imgs/hero-01.jpg') no-repeat ;
+    background-size: cover ;
+    background-attachment: fixed;
+}
+.homePage .sec_keyFeature{
+    display: inline-block;
+    width: 49.8%;
+    min-height: 200px;
+    padding: 0;
+    border-right: 1px solid black;
+    border-bottom: 2px solid black;
+    margin-bottom: -5px;
+    background-color: rgba(0,0,0,0.7) !important;
 }

@@ -6,6 +6,7 @@
     "react-scripts": "0.9.5"
   },
   "dependencies": {
+    "animate.css": "^3.5.2",
     "font-awesome": "^4.7.0",
     "material-ui": "0.17.0",
     "react": "^15.4.2",

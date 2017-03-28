@@ -10,7 +10,7 @@ class App extends Component {
     return (
       <MuiThemeProvider>
         <div>
-          <AppBar className="AppBar" title="Title" iconElementRight={ <IconButton iconClassName="fa fa-ellipsis-v" />}/>
+          <AppBar className="AppBar animated fadeIn" title="Title" iconElementRight={ <IconButton iconClassName="fa fa-ellipsis-v" />}/>
           <AppRouter/>
         </div>
       </MuiThemeProvider>
