@@ -12,7 +12,7 @@ body{
     background: -webkit-linear-gradient(45deg, #28343b 0%,#28343b 0%,#828c95 36%,#b5bdc8 99%);
     background: linear-gradient(45deg, #28343b 0%,#28343b 0%,#828c95 36%,#b5bdc8 99%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#28343b', endColorstr='#b5bdc8',GradientType=1 );
-
+    position: fixed !important;
 }
 
 .homePage .hero-01{
