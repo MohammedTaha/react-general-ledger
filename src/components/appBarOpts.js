@@ -6,12 +6,6 @@ import IconButton from 'material-ui/IconButton';
 class AppBarOpts extends Component {
 
 
-    optSelected(optName){
-        console.log("optName");
-        console.log(optName);
-        this.props.clickHandler(optName)
-    }
-
     render() {
         return (
             <IconMenu
@@ -21,9 +15,9 @@ class AppBarOpts extends Component {
                 targetOrigin={{horizontal: 'right', vertical: 'top'}}
                 anchorOrigin={{horizontal: 'right', vertical: 'top'}}
             >
-                <MenuItem primaryText="Sign in" onClick={this.optSelected.bind(this, 'Sign in')}/>
-                <MenuItem primaryText="Services"  onClick={this.optSelected.bind(this, 'Services')}/>
-                <MenuItem primaryText="Contact Us"  onClick={this.optSelected.bind(this, 'Contact Us')}/>
+                <MenuItem primaryText="Sign in" onClick={this.props.clickHandler.bind(this, 'Sign in')}/>
+                <MenuItem primaryText="Services"  onClick={this.props.clickHandler.bind(this, 'Services')}/>
+                <MenuItem primaryText="Contact Us"  onClick={this.props.clickHandler.bind(this, 'Contact Us')}/>
             </IconMenu>
         );
     }

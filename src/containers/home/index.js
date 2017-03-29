@@ -1,7 +1,13 @@
 import React, {Component} from 'react';
-import RaisedButton from 'material-ui/RaisedButton';
-import FlatButton from 'material-ui/FlatButton';
-import {Card, CardActions, CardText} from 'material-ui/Card';
+import {Card, CardText} from 'material-ui/Card';
+import {connect} from 'react-redux';
+
+function mapStatetoProps(state){
+    console.log(" state ", state);
+    return {
+        UIStates :  state.UIStates
+    };
+}
 
 class Home extends Component {
 
@@ -10,6 +16,7 @@ class Home extends Component {
             <div className='homePage'>
                 <div className='hero-01'> 
                     <section className='containerAppIntro'>
+                        {!this.props.UIStates.showLoginForm?
                         <Card className='articleAppIntro'>
                             <CardText>
                                 <h1 className='animated bounceInLeft appName'>
@@ -20,6 +27,7 @@ class Home extends Component {
                                 </p>
                             </CardText>
                         </Card>
+                        :""}
                     </section>
                 </div>
                 <div className='container_keyFeatures'>
@@ -78,4 +86,4 @@ class Home extends Component {
     }
 }
 
-export default Home;
+export default connect(mapStatetoProps)(Home);
