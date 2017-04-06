@@ -1,21 +1,15 @@
 import {UIActs} from '../../actions'
 
 let UIStateObj = {
-    showLoginForm : true,
-    showSignUpForm : true,
+    activeFormType: "INTRO_FORM",
     showLoadingGif : false
 };
 const UIStates = (state = UIStateObj, action)=>{
 
     let newState = {...state};
     switch(action.type){
-        case UIActs.SHOW_LOGIN_FORM:
-            newState.showSignUpForm = false;
-            newState.showLoginForm = !newState.showLoginForm;
-            break;
-        case UIActs.SHOW_SIGNUP_FORM:
-            newState.showLoginForm = false;
-            newState.showSignUpForm = true;
+        case UIActs.SHOW_FORM_ON_HOME_PAGE:
+            newState.activeFormType = action.payload;
             break;
         case UIActs.SHOW_LOADING_GIF:
             newState.showLoadingGif = true;

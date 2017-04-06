@@ -8,9 +8,7 @@ class SignInForm extends Component {
 
     constructor(props){
         super(props);
-        this.state = {
-            user : {userName : "", password : "", reconfirmPassword : ""}
-        };
+        this.state = {userName : "", displayName :"", password : "", reconfirmPassword : ""};
     }
 
     handleChange(fieldName, eve, newVal){
@@ -19,7 +17,12 @@ class SignInForm extends Component {
         this.setState(newState);
     }
 
-    
+    makeSignUpAttempt(){
+        let user = this.state;
+        if(user.password===user.reconfirmPassword){
+            this.props.makeSignUpAttempt(user);
+        }
+    }
     render() {
         return (
             <Card className="animated flipInX signUpFormCard">
@@ -28,13 +31,14 @@ class SignInForm extends Component {
                         Sign Up please 
                     </h1>
                     <div className="signUpFormFields">
-                        <TextField value={this.state.user.userName} onChange={this.handleChange.bind(this, 'userName')} name='userName' hintText="User Name" fullWidth={true} floatingLabelText="Your user name" /><br />
-                        <TextField value={this.state.user.password} onChange={this.handleChange.bind(this, 'password')} name='password' hintText="Password"  fullWidth={true} floatingLabelText="Your password" type="password"/><br />
-                        <TextField value={this.state.user.reconfirmPassword} onChange={this.handleChange.bind(this, 'reconfirmPassword')} name='password' hintText="Password"  fullWidth={true} floatingLabelText="Reconfirm password" type="password"/><br />
+                        <TextField value={this.state.userName} onChange={this.handleChange.bind(this, 'userName')} name='userName' hintText="User Name" fullWidth={true} floatingLabelText="Your user name" /><br />
+                        <TextField value={this.state.displayName} onChange={this.handleChange.bind(this, 'displayName')} name='displayName' hintText="Complete Name" fullWidth={true} floatingLabelText="Your complete name" /><br />
+                        <TextField value={this.state.password} onChange={this.handleChange.bind(this, 'password')} name='password' hintText="Password"  fullWidth={true} floatingLabelText="Your password" type="password"/><br />
+                        <TextField value={this.state.reconfirmPassword} onChange={this.handleChange.bind(this, 'reconfirmPassword')} name='password' hintText="Password"  fullWidth={true} floatingLabelText="Reconfirm password" type="password"/><br />
                     </div>
                 </CardText>
                 <CardActions className="rightAlignedElems">
-                    <FlatButton onClick={this.props.makeSignInAttempt.bind(this, this.state)} label="Sign in" />
+                    <FlatButton onClick={this.makeSignUpAttempt.bind(this)} label="Sign in" />
                 </CardActions>
             </Card> 
         );

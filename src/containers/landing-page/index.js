@@ -6,6 +6,7 @@ import AppRouter from '../../AppRouter';
 import * as custComponents from '../../components';
 import {connect} from 'react-redux';
 import {UIActs} from '../../actions';
+import {bindUserAuthEvents} from '../../firebase/firebaseHandler';
 
 
 function mapStatetoProps(state){
@@ -16,9 +17,12 @@ function mapStatetoProps(state){
 function mapDispatchtoProps(dispatch){
 
     return {
-        showSignInForm : ()=>{ dispatch(UIActs.showLoginForm()); },
-        showSignUpForm : ()=>{ dispatch(UIActs.showSignUpForm()); },
-
+        showSignInForm : ()=>{ dispatch(UIActs.showFormOnHome('SIGNIN_FORM')); },
+        showSignUpForm : ()=>{ dispatch(UIActs.showFormOnHome('SIGNUP_FORM')); },
+        checkLoggedInUser: ()=>{
+            dispatch(UIActs.showLoadingGIF());
+            dispatch(bindUserAuthEvents());
+        }
     }
 }
 
@@ -26,13 +30,15 @@ function mapDispatchtoProps(dispatch){
 class LandingPage extends Component{
 
     clickHandler(optName){
-        console.log("Inside click handler ", optName);
         if(optName==='Sign in'){
             this.props.showSignInForm();
         }
         else if(optName==='Sign up'){
             this.props.showSignUpForm();
         }
+    }
+    componentDidMount(){
+        this.props.checkLoggedInUser();
     }
     render(){
         return (

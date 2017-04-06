@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as custComponents from '../../components';
 import {UIActs} from '../../actions';
-import {firebaseAuth} from '../../firebase';
-
+import {firebaseAuth} from '../../firebase/index';
+import {firebaseUser} from '../../firebase/firebaseHandler'
 
 function mapStatetoProps(state){
     return {
@@ -14,16 +14,7 @@ function mapStatetoProps(state){
 function mapDispatchtoProps(dispatch){
     return {
         attemptToSignUp : (data)=>{ 
-            dispatch(UIActs.showLoadingGIF()); 
-            firebaseAuth.createUserWithEmailAndPassword(data.userName, data.password)
-                .then((success)=>{
-                    console.log("Sign up success ", success);
-                    dispatch(UIActs.hideLoadingGIF()); 
-                })
-                .catch((err)=>{
-                    console.log("Sign up err ", err );
-                    dispatch(UIActs.hideLoadingGIF()); 
-                });
+            dispatch(firebaseUser.attemptToSignUp(data));
         },
         attemptToSignIn : (data)=>{ 
             dispatch(UIActs.showLoadingGIF()); 
@@ -45,20 +36,23 @@ function mapDispatchtoProps(dispatch){
 class Home extends Component {
 
     makeSignInAttempt(data){
-        console.log(data);
         this.props.attemptToSignIn(data);
     }
+    makeSignUpAttempt(data){
+        this.props.attemptToSignUp(data);
+    }
+    
     render() {
         return (
             <div className='homePage'>
                 <div className='hero-01'> 
                     <section className='containerAppIntro'>
                         {
-                            this.props.UIStates.showLoginForm?
+                            this.props.UIStates.activeFormType==='SIGNIN_FORM'?
                             <custComponents.SignInForm makeSignInAttempt={this.makeSignInAttempt.bind(this)}/> :
                             (
-                                this.props.UIStates.showSignUpForm ? 
-                                <custComponents.SignUpForm makeSignInAttempt={this.makeSignInAttempt.bind(this)}/> :
+                                this.props.UIStates.activeFormType==='SIGNUP_FORM' ? 
+                                <custComponents.SignUpForm makeSignUpAttempt={this.makeSignUpAttempt.bind(this)}/> :
                                 <custComponents.AppInfoCard/>
                             )                        
                         }
