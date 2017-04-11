@@ -15,7 +15,6 @@ export const firebaseUser = {
             dispatch(UIActs.showLoadingGIF()); 
             firebaseAuth.createUserWithEmailAndPassword(data.userName, data.password)
                 .then((user)=>{
-                    user.sendEmailVerification();
                     return (
                         user.updateProfile({
                                 displayName : data.displayName
@@ -28,13 +27,30 @@ export const firebaseUser = {
                 .catch((err)=>{
                     console.log("Sign up err ", err );
                     dispatch(UIActs.hideLoadingGIF()); 
+                    dispatch(UIActs.toggleNotificationMsgSnackbar({text : err.message, duration : 5000})); 
                 });
+        }
+    },
+    attemptToSignIn : (data)=>{
+        return dispatch => {
+            dispatch(UIActs.showLoadingGIF()); 
+            firebaseAuth.signInWithEmailAndPassword(data.userName, data.password)
+                .then((success)=>{
+                    console.log("Sign in success ", success);
+                    dispatch(UIActs.hideLoadingGIF()); 
+                })
+                .catch((err)=>{
+                    console.log("Sign in err ", err );
+                    dispatch(UIActs.hideLoadingGIF()); 
+                    dispatch(UIActs.toggleNotificationMsgSnackbar({text : err.message, duration : 5000})); 
+                });
+
         }
     }
 }    
 
 
-const bindUserAuthEvents = ()=>{
+export const bindUserAuthEvents = ()=>{
 
     return (dispatch)=>{
         firebaseAuth.onAuthStateChanged((authState)=>{
@@ -44,4 +60,4 @@ const bindUserAuthEvents = ()=>{
     }
 }
 
-export  {initEvents, bindUserAuthEvents};
+export  {initEvents};

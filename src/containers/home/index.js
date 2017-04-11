@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as custComponents from '../../components';
-import {UIActs} from '../../actions';
-import {firebaseAuth} from '../../firebase/index';
 import {firebaseUser} from '../../firebase/firebaseHandler'
 
 function mapStatetoProps(state){
@@ -17,16 +15,7 @@ function mapDispatchtoProps(dispatch){
             dispatch(firebaseUser.attemptToSignUp(data));
         },
         attemptToSignIn : (data)=>{ 
-            dispatch(UIActs.showLoadingGIF()); 
-            firebaseAuth.signInWithEmailAndPassword(data.userName, data.password)
-                .then((success)=>{
-                    console.log("Sign in success ", success);
-                    dispatch(UIActs.hideLoadingGIF()); 
-                })
-                .catch((err)=>{
-                    console.log("Sign in err ", err );
-                    dispatch(UIActs.hideLoadingGIF()); 
-                });
+            dispatch(firebaseUser.attemptToSignIn(data));
         }
     }
 }
@@ -41,7 +30,11 @@ class Home extends Component {
     makeSignUpAttempt(data){
         this.props.attemptToSignUp(data);
     }
-    
+    componentDidMount(){
+        /*setTimeout(()=>{
+            this.props.history.push('/404');
+        }, 3000);*/
+    }
     render() {
         return (
             <div className='homePage'>

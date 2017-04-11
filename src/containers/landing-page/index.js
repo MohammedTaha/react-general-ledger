@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
+import Snackbar from 'material-ui/Snackbar';
 import LinearProgress from 'material-ui/LinearProgress';
 import AppRouter from '../../AppRouter';
 import * as custComponents from '../../components';
@@ -22,7 +23,8 @@ function mapDispatchtoProps(dispatch){
         checkLoggedInUser: ()=>{
             dispatch(UIActs.showLoadingGIF());
             dispatch(bindUserAuthEvents());
-        }
+        },
+        notificationMsgSnackbarClosed : ()=>{ dispatch(UIActs.toggleNotificationMsgSnackbar(null));}
     }
 }
 
@@ -40,6 +42,10 @@ class LandingPage extends Component{
     componentDidMount(){
         this.props.checkLoggedInUser();
     }
+    handleSnackbarRequestClose(){
+        this.props.notificationMsgSnackbarClosed()
+    }
+
     render(){
         return (
             <MuiThemeProvider>
@@ -54,7 +60,15 @@ class LandingPage extends Component{
                             }
                         />
                         { this.props.UIStates.showLoadingGif ? <LinearProgress mode="indeterminate" /> : ""}
+                        <br/>
+                        <br/>
+                        <Snackbar
+                            open={this.props.UIStates.notificationMsg && this.props.UIStates.notificationMsg.text ? true : false}
+                            message={this.props.UIStates.notificationMsg.text}
+                            autoHideDuration={this.props.UIStates.notificationMsg.duration}
+                            onRequestClose={this.handleSnackbarRequestClose.bind(this)}
 
+                        />    
                     </div>
                     <AppRouter/>
                 </div>

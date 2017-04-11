@@ -5,11 +5,20 @@ export default class UIActs{
     static SHOW_LOADING_GIF = "SHOW_LOADING_GIF";
     static HIDE_LOADING_GIF = "HIDE_LOADING_GIF";
     static SHOW_FORM_ON_HOME_PAGE = "SHOW_FORM_ON_HOME_PAGE";
+    static SET_NOTIFICATION_MSG_SNACKBAR = "SET_NOTIFICATION_MSG_SNACKBAR";
+    
 
     static showFormOnHome(formType){
         return {
             type : this.SHOW_FORM_ON_HOME_PAGE,
             payload : formType
+        };
+    }
+
+    static toggleNotificationMsgSnackbar(msg){
+        return {
+            type : this.SET_NOTIFICATION_MSG_SNACKBAR,
+            payload : (msg && msg.text ? {text : msg.text, duration : msg.duration} : null)
         };
     }
 

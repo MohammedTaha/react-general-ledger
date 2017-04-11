@@ -2,7 +2,11 @@ import {UIActs} from '../../actions'
 
 let UIStateObj = {
     activeFormType: "INTRO_FORM",
-    showLoadingGif : false
+    showLoadingGif : false,
+    notificationMsg : {
+        text : "",
+        duration : 0
+    }
 };
 const UIStates = (state = UIStateObj, action)=>{
 
@@ -16,6 +20,19 @@ const UIStates = (state = UIStateObj, action)=>{
             break;
         case UIActs.HIDE_LOADING_GIF:
             newState.showLoadingGif = false;
+            break;
+        case UIActs.SET_NOTIFICATION_MSG_SNACKBAR:
+            if(action.payload && action.payload.text){
+                newState.notificationMsg = {
+                    text : action.payload.text,
+                    duration : 5000
+                };
+            } else {
+                newState.notificationMsg = {
+                    text : "",
+                    duration : 0
+                };
+            }
             break;
         default:
             break;
