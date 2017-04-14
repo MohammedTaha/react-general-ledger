@@ -46,6 +46,16 @@ export const firebaseUser = {
                 });
 
         }
+    },
+    signoutCurrentUser : ()=>{
+        return dispatch => {
+            dispatch(UIActs.showLoadingGIF()); 
+            firebaseAuth.signOut()
+                .then(()=>{
+                    dispatch(UIActs.hideLoadingGIF());
+                });
+        }
+
     }
 }    
 

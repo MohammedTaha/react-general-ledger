@@ -7,19 +7,22 @@ import AppRouter from '../../AppRouter';
 import * as custComponents from '../../components';
 import {connect} from 'react-redux';
 import {UIActs} from '../../actions';
-import {bindUserAuthEvents} from '../../firebase/firebaseHandler';
+import {bindUserAuthEvents, firebaseUser} from '../../firebase/firebaseHandler';
 
 
 function mapStatetoProps(state){
     return {
-        UIStates :  state.UIStates
+        UIStates :  state.UIStates,
+        AuthStates : state.AuthStates
     };
 }
 function mapDispatchtoProps(dispatch){
 
     return {
-        showSignInForm : ()=>{ dispatch(UIActs.showFormOnHome('SIGNIN_FORM')); },
-        showSignUpForm : ()=>{ dispatch(UIActs.showFormOnHome('SIGNUP_FORM')); },
+        showFormOnHome : (formName)=>{ dispatch(UIActs.showFormOnHome(formName)); },
+        signoutCurrentUser : () => { 
+            dispatch(firebaseUser.signoutCurrentUser());
+        },
         checkLoggedInUser: ()=>{
             dispatch(UIActs.showLoadingGIF());
             dispatch(bindUserAuthEvents());
@@ -32,12 +35,26 @@ function mapDispatchtoProps(dispatch){
 class LandingPage extends Component{
 
     clickHandler(optName){
-        if(optName==='Sign in'){
-            this.props.showSignInForm();
+
+        let formType = "";
+        switch(optName){
+            case 'Sign in':
+                formType = "SIGNIN_FORM";
+                break;
+            case 'Sign up':
+                formType = "SIGNUP_FORM";
+                break;
+            case 'Sign out':
+                formType = "INTRO_FORM";
+                this.props.signoutCurrentUser();
+                break;
+            default:
+                break;
         }
-        else if(optName==='Sign up'){
-            this.props.showSignUpForm();
+        if(formType){
+            this.props.showFormOnHome(formType);
         }
+
     }
     componentDidMount(){
         this.props.checkLoggedInUser();
@@ -53,15 +70,13 @@ class LandingPage extends Component{
                     <div className='AppBarContainer'>
                         <AppBar 
                             className="AppBar animated fadeIn" 
-                            title="The name of this app" 
+                            title={"Welcome "+ (this.props.AuthStates.signedInUser && this.props.AuthStates.signedInUser.displayName ? this.props.AuthStates.signedInUser.displayName : " to APP NAME")} 
                             iconStyleLeft={{display:'none'}} 
                             iconElementRight={ 
                                 <custComponents.AppBarOpts opts={this.props.UIStates.menuOpts} clickHandler={this.clickHandler.bind(this)}/>
                             }
                         />
                         { this.props.UIStates.showLoadingGif ? <LinearProgress mode="indeterminate" /> : ""}
-                        <br/>
-                        <br/>
                         <Snackbar
                             open={this.props.UIStates.notificationMsg && this.props.UIStates.notificationMsg.text ? true : false}
                             message={this.props.UIStates.notificationMsg.text}
@@ -69,6 +84,10 @@ class LandingPage extends Component{
                             onRequestClose={this.handleSnackbarRequestClose.bind(this)}
                         />    
                     </div>
+                    {/*<br/>
+                    <br/>
+                    <br/>
+                    <br/>*/}
                     <AppRouter/>
                 </div>
             </MuiThemeProvider>

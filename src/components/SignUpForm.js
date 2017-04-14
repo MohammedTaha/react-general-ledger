@@ -38,7 +38,7 @@ class SignInForm extends Component {
                     </div>
                 </CardText>
                 <CardActions className="rightAlignedElems">
-                    <FlatButton onClick={this.makeSignUpAttempt.bind(this)} label="Sign in" />
+                    <FlatButton onClick={this.makeSignUpAttempt.bind(this)} label="Sign up" />
                 </CardActions>
             </Card> 
         );

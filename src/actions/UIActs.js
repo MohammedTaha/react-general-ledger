@@ -20,7 +20,7 @@ export default class UIActs{
 
         let opts = ["Sign in", "Sign up", "Services", "Contact us"];
         if(obj.loggedIn){
-            opts = ["Services", "Contact us", "Sign out"];
+            opts = ["Companies", "Sign out"];
         }
 
         return {
