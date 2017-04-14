@@ -43,7 +43,7 @@ class LandingPage extends Component{
         this.props.checkLoggedInUser();
     }
     handleSnackbarRequestClose(){
-        this.props.notificationMsgSnackbarClosed()
+        this.props.notificationMsgSnackbarClosed();
     }
 
     render(){
@@ -56,7 +56,7 @@ class LandingPage extends Component{
                             title="The name of this app" 
                             iconStyleLeft={{display:'none'}} 
                             iconElementRight={ 
-                                <custComponents.AppBarOpts clickHandler={this.clickHandler.bind(this)}/>
+                                <custComponents.AppBarOpts opts={this.props.UIStates.menuOpts} clickHandler={this.clickHandler.bind(this)}/>
                             }
                         />
                         { this.props.UIStates.showLoadingGif ? <LinearProgress mode="indeterminate" /> : ""}
@@ -67,7 +67,6 @@ class LandingPage extends Component{
                             message={this.props.UIStates.notificationMsg.text}
                             autoHideDuration={this.props.UIStates.notificationMsg.duration}
                             onRequestClose={this.handleSnackbarRequestClose.bind(this)}
-
                         />    
                     </div>
                     <AppRouter/>

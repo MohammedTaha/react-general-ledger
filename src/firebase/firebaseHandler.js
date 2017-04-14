@@ -1,5 +1,5 @@
 import {firebaseAuth} from './index';
-import {UIActs} from '../actions';
+import {UIActs, AuthActs} from '../actions';
 
 const initEvents = ()=>{
 
@@ -54,8 +54,17 @@ export const bindUserAuthEvents = ()=>{
 
     return (dispatch)=>{
         firebaseAuth.onAuthStateChanged((authState)=>{
-            console.log("authState");
-            console.log(authState);
+            /*console.log("authState");
+            console.log(authState);*/
+            dispatch(UIActs.hideLoadingGIF());
+            if(authState && authState.uid){
+                dispatch(AuthActs.setSignedInUser({displayName : authState.displayName, email : authState.email, uid : authState.uid, photoURL: authState.photoURL}));
+                dispatch(UIActs.setMenuOpts({loggedIn : true}));
+            }
+            else {
+                dispatch(AuthActs.setSignedInUser(null));
+                dispatch(UIActs.setMenuOpts({loggedIn : false}));
+            }
         });
     }
 }

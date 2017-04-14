@@ -2,6 +2,7 @@ import {UIActs} from '../../actions'
 
 let UIStateObj = {
     activeFormType: "INTRO_FORM",
+    menuOpts : ["Sign in", "Sign up", "Services", "Contact us"],
     showLoadingGif : false,
     notificationMsg : {
         text : "",
@@ -20,6 +21,9 @@ const UIStates = (state = UIStateObj, action)=>{
             break;
         case UIActs.HIDE_LOADING_GIF:
             newState.showLoadingGif = false;
+            break;
+        case UIActs.SET_MENU_OPTS:
+            newState.menuOpts = action.payload;
             break;
         case UIActs.SET_NOTIFICATION_MSG_SNACKBAR:
             if(action.payload && action.payload.text){

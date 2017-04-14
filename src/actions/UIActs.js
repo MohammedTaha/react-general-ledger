@@ -5,6 +5,7 @@ export default class UIActs{
     static SHOW_LOADING_GIF = "SHOW_LOADING_GIF";
     static HIDE_LOADING_GIF = "HIDE_LOADING_GIF";
     static SHOW_FORM_ON_HOME_PAGE = "SHOW_FORM_ON_HOME_PAGE";
+    static SET_MENU_OPTS = "SET_MENU_OPTS";
     static SET_NOTIFICATION_MSG_SNACKBAR = "SET_NOTIFICATION_MSG_SNACKBAR";
     
 
@@ -13,6 +14,19 @@ export default class UIActs{
             type : this.SHOW_FORM_ON_HOME_PAGE,
             payload : formType
         };
+    }
+
+    static setMenuOpts(obj){
+
+        let opts = ["Sign in", "Sign up", "Services", "Contact us"];
+        if(obj.loggedIn){
+            opts = ["Services", "Contact us", "Sign out"];
+        }
+
+        return {
+            type : this.SET_MENU_OPTS,
+            payload : opts
+        }
     }
 
     static toggleNotificationMsgSnackbar(msg){
