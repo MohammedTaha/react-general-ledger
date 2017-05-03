@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
+
 class AppBarOpts extends Component {
 
 
@@ -20,7 +21,8 @@ class AppBarOpts extends Component {
                 this.props.opts.map((item, idx)=>{
                     return <MenuItem key={idx} primaryText={item} onClick={this.props.clickHandler.bind(this, item)}/>
                 })
-            }                
+            }          
+          
             </IconMenu>
         );
     }

@@ -5,7 +5,8 @@ import {firebaseUser} from '../../firebase/firebaseHandler'
 
 function mapStatetoProps(state){
     return {
-        UIStates :  state.UIStates
+        UIStates :  state.UIStates,
+        AuthStates : state.AuthStates
     };
 }
 
@@ -30,14 +31,17 @@ class Home extends Component {
     makeSignUpAttempt(data){
         this.props.attemptToSignUp(data);
     }
-    componentDidMount(){
-        /*setTimeout(()=>{
-            this.props.history.push('/404');
-        }, 3000);*/
+    navigateUser(route){
+        setTimeout(()=>{
+            this.props.history.push(route);
+        }, 1000);
     }
-    render() {
-        return (
-            <div className='homePage'>
+
+    render() {        
+         //(this.props.AuthStates.signedInUser && this.props.AuthStates.signedInUser.displayName ? this.navigateUser('/Companies') : console.log('user Not logged in yet'))
+         return (
+             
+             <div className='homePage'>
                 <div className='hero-01'> 
                     <section className='containerAppIntro'>
                         {

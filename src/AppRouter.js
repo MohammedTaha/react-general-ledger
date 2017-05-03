@@ -9,7 +9,7 @@ class AppRouter extends Component {
             <Router>
                 <div>
                     <Route exact={true} path="/" component={Home}></Route>
-                    <Route exact={true} path="/CompanyRegistration" component={CompanyRegistration}></Route>
+                    <Route exact={true} path="/Companies" component={CompanyRegistration}></Route>
                     <Route path="/404" component={PageNotFound}></Route>
                 </div>
             </Router>

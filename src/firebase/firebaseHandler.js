@@ -38,6 +38,7 @@ export const firebaseUser = {
                 .then((success)=>{
                     console.log("Sign in success ", success);
                     dispatch(UIActs.hideLoadingGIF()); 
+                    //dispatch(UIActs.navigateUser('/Companies')); 
                 })
                 .catch((err)=>{
                     console.log("Sign in err ", err );

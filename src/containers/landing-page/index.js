@@ -35,7 +35,6 @@ function mapDispatchtoProps(dispatch){
 class LandingPage extends Component{
 
     clickHandler(optName){
-
         let formType = "";
         switch(optName){
             case 'Sign in':
@@ -71,12 +70,15 @@ class LandingPage extends Component{
                         <AppBar 
                             className="AppBar animated fadeIn" 
                             title={"Welcome "+ (this.props.AuthStates.signedInUser && this.props.AuthStates.signedInUser.displayName ? this.props.AuthStates.signedInUser.displayName : " to APP NAME")} 
-                            iconStyleLeft={{display:'none'}} 
+                            iconStyleLeft={{display : (this.props.AuthStates.signedInUser && this.props.AuthStates.signedInUser.displayName ? 'block': "none")}} 
                             iconElementRight={ 
-                                <custComponents.AppBarOpts opts={this.props.UIStates.menuOpts} clickHandler={this.clickHandler.bind(this)}/>
+                                <custComponents.AppBarOpts opts={this.props.UIStates.menuOpts} links={this.props.UIStates.menuLinks} clickHandler={this.clickHandler.bind(this)}/>
                             }
                         />
+                        
+                        
                         { this.props.UIStates.showLoadingGif ? <LinearProgress mode="indeterminate" /> : ""}
+                        
                         <Snackbar
                             open={this.props.UIStates.notificationMsg && this.props.UIStates.notificationMsg.text ? true : false}
                             message={this.props.UIStates.notificationMsg.text}
@@ -84,11 +86,9 @@ class LandingPage extends Component{
                             onRequestClose={this.handleSnackbarRequestClose.bind(this)}
                         />    
                     </div>
-                    {/*<br/>
-                    <br/>
-                    <br/>
-                    <br/>*/}
+
                     <AppRouter/>
+
                 </div>
             </MuiThemeProvider>
 

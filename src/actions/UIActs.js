@@ -18,9 +18,9 @@ export default class UIActs{
 
     static setMenuOpts(obj){
 
-        let opts = ["Sign in", "Sign up", "Services", "Contact us"];
+        let opts = ["Sign in", "Sign up"];
         if(obj.loggedIn){
-            opts = ["Companies", "Sign out"];
+            opts = ["Sign out"];
         }
 
         return {

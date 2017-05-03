@@ -4,7 +4,7 @@ import {LandingPage} from './containers'
 
 class App extends Component {
   render() {
-    return <LandingPage/>;
+    return( <LandingPage/>)
   }
 }
 
