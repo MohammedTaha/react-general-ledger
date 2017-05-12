@@ -5,6 +5,7 @@ let UIStateObj = {
     menuLinks : [{desc : "Companies", link: "/Companies"}, {desc : "Services", link: "/"}, {desc : "Contact Us", link: "/"}],
     menuOpts : ["Sign in", "Sign up"],
     showLoadingGif : false,
+    navigationgationDrawerVisibility:false,
     notificationMsg : {
         text : "",
         duration : 0
@@ -22,6 +23,9 @@ const UIStates = (state = UIStateObj, action)=>{
             break;
         case UIActs.HIDE_LOADING_GIF:
             newState.showLoadingGif = false;
+            break;
+        case UIActs.TOGGEL_NAVIGATION_DRAWER:
+            newState.navigationgationDrawerVisibility = !newState.navigationgationDrawerVisibility;
             break;
         case UIActs.SET_MENU_OPTS:
             newState.menuOpts = action.payload;

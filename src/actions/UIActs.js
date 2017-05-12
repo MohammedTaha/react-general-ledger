@@ -4,9 +4,10 @@ export default class UIActs{
     static SHOW_SIGNUP_FORM = "SHOW_SIGNUP_FORM";
     static SHOW_LOADING_GIF = "SHOW_LOADING_GIF";
     static HIDE_LOADING_GIF = "HIDE_LOADING_GIF";
-    static SHOW_FORM_ON_HOME_PAGE = "SHOW_FORM_ON_HOME_PAGE";
-    static SET_MENU_OPTS = "SET_MENU_OPTS";
-    static SET_NOTIFICATION_MSG_SNACKBAR = "SET_NOTIFICATION_MSG_SNACKBAR";
+    static SHOW_FORM_ON_HOME_PAGE   = "SHOW_FORM_ON_HOME_PAGE";
+    static SET_MENU_OPTS            = "SET_MENU_OPTS";
+    static SET_NOTIFICATION_MSG_SNACKBAR    = "SET_NOTIFICATION_MSG_SNACKBAR";
+    static TOGGEL_NAVIGATION_DRAWER         = "TOGGEL_NAVIGATION_DRAWER";
     
 
     static showFormOnHome(formType){
@@ -36,6 +37,11 @@ export default class UIActs{
         };
     }
 
+    static toggelNavigationDrawer(){
+        return {
+            type : this.TOGGEL_NAVIGATION_DRAWER
+        };
+    }
     static showLoadingGIF(){
         return {
             type : this.SHOW_LOADING_GIF

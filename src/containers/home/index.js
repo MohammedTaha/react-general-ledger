@@ -1,7 +1,14 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
+import Drawer from 'material-ui/Drawer';
+import AppBar from 'material-ui/AppBar';
+import IconButton from 'material-ui/IconButton';
+import Menu from 'material-ui/Menu';
+import MenuItem from 'material-ui/MenuItem';
 import * as custComponents from '../../components';
 import {firebaseUser} from '../../firebase/firebaseHandler'
+import {UIActs} from '../../actions';
 
 function mapStatetoProps(state){
     return {
@@ -17,7 +24,8 @@ function mapDispatchtoProps(dispatch){
         },
         attemptToSignIn : (data)=>{ 
             dispatch(firebaseUser.attemptToSignIn(data));
-        }
+        },
+        toggelNavigationDrawer : ()=>{dispatch(UIActs.toggelNavigationDrawer()); }
     }
 }
 
@@ -37,11 +45,17 @@ class Home extends Component {
         }, 1000);
     }
 
+
     render() {        
-         //(this.props.AuthStates.signedInUser && this.props.AuthStates.signedInUser.displayName ? this.navigateUser('/Companies') : console.log('user Not logged in yet'))
          return (
              
              <div className='homePage'>
+
+                <custComponents.NavDrawer 
+                    isOpen={this.props.UIStates.navigationgationDrawerVisibility}
+                    fn_close={this.props.toggelNavigationDrawer.bind(this)} 
+                    />
+
                 <div className='hero-01'> 
                     <section className='containerAppIntro'>
                         {

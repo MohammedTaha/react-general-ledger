@@ -27,7 +27,8 @@ function mapDispatchtoProps(dispatch){
             dispatch(UIActs.showLoadingGIF());
             dispatch(bindUserAuthEvents());
         },
-        notificationMsgSnackbarClosed : ()=>{ dispatch(UIActs.toggleNotificationMsgSnackbar(null));}
+        notificationMsgSnackbarClosed : ()=>{dispatch(UIActs.toggleNotificationMsgSnackbar(null));},
+        toggelNavigationDrawer : ()=>{dispatch(UIActs.toggelNavigationDrawer()); }
     }
 }
 
@@ -61,22 +62,22 @@ class LandingPage extends Component{
     handleSnackbarRequestClose(){
         this.props.notificationMsgSnackbarClosed();
     }
-
+    
     render(){
         return (
             <MuiThemeProvider>
-                <div>
+                <div>                    
                     <div className='AppBarContainer'>
                         <AppBar 
                             className="AppBar animated fadeIn" 
                             title={"Welcome "+ (this.props.AuthStates.signedInUser && this.props.AuthStates.signedInUser.displayName ? this.props.AuthStates.signedInUser.displayName : " to APP NAME")} 
+                            onLeftIconButtonTouchTap={this.props.toggelNavigationDrawer.bind(this)}
                             iconStyleLeft={{display : (this.props.AuthStates.signedInUser && this.props.AuthStates.signedInUser.displayName ? 'block': "none")}} 
                             iconElementRight={ 
-                                <custComponents.AppBarOpts opts={this.props.UIStates.menuOpts} links={this.props.UIStates.menuLinks} clickHandler={this.clickHandler.bind(this)}/>
+                                <custComponents.AppBarOpts opts={this.props.UIStates.menuOpts} clickHandler={this.clickHandler.bind(this)}/>
                             }
                         />
-                        
-                        
+
                         { this.props.UIStates.showLoadingGif ? <LinearProgress mode="indeterminate" /> : ""}
                         
                         <Snackbar
@@ -86,7 +87,6 @@ class LandingPage extends Component{
                             onRequestClose={this.handleSnackbarRequestClose.bind(this)}
                         />    
                     </div>
-
                     <AppRouter/>
 
                 </div>
