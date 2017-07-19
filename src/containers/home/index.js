@@ -1,11 +1,5 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import Drawer from 'material-ui/Drawer';
-import AppBar from 'material-ui/AppBar';
-import IconButton from 'material-ui/IconButton';
-import Menu from 'material-ui/Menu';
-import MenuItem from 'material-ui/MenuItem';
 import * as custComponents from '../../components';
 import {firebaseUser} from '../../firebase/firebaseHandler'
 import {UIActs} from '../../actions';
@@ -53,6 +47,7 @@ class Home extends Component {
 
                 <custComponents.NavDrawer 
                     isOpen={this.props.UIStates.navigationgationDrawerVisibility}
+                    menuLinks={this.props.UIStates.menuLinks}
                     fn_close={this.props.toggelNavigationDrawer.bind(this)} 
                     />
 

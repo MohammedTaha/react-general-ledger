@@ -23,11 +23,14 @@ class NavDrawer extends Component {
                         iconElementRight={<IconButton iconClassName="fa fa-times" />}/>
 
                     <Menu>
-                        <MenuItem>
-                            <Link to="Companies">Companies</Link>
-                        </MenuItem>
-                        <MenuItem>Hello world</MenuItem>
-                        <MenuItem>Hello world</MenuItem>
+
+                        {this.props.menuLinks.map((menu, idx)=>{
+                            return (
+                                <MenuItem key={idx}>
+                                    <Link onTouchTap={this.props.fn_close} to={menu.link}>{menu.desc}</Link>
+                                </MenuItem>
+                            )
+                        })}
                     </Menu>
                 </Drawer>
             </div>

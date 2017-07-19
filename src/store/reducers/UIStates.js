@@ -2,7 +2,7 @@ import {UIActs} from '../../actions'
 
 let UIStateObj = {
     activeFormType: "INTRO_FORM",
-    menuLinks : [{desc : "Companies", link: "/Companies"}, {desc : "Services", link: "/"}, {desc : "Contact Us", link: "/"}],
+    menuLinks : [{desc : "Home", link: "/"},{desc : "Companies", link: "/Companies"}],
     menuOpts : ["Sign in", "Sign up"],
     showLoadingGif : false,
     navigationgationDrawerVisibility:false,

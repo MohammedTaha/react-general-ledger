@@ -36,7 +36,13 @@ a{
 .rightAlignedElems{
     text-align: right;
 }
-.signUpFormCard, .signInFormCard{
+.cardSubHeading{
+    font-style: italic;
+    font-weight: normal;
+    color: darkgray;
+    text-shadow: none;
+}
+.signUpFormCard, .signInFormCard, .registrationFormCard{
     width: 35em;
     margin: 2vh auto;
     background-color: rgba(255,255,255,0.95) !important;
@@ -97,4 +103,10 @@ a{
     border-bottom: 2px solid black;
     margin-bottom: -5px;
     background-color: rgba(0,0,0,0.7) !important;
+}
+
+
+.companyRegistrationPage .companyRegistrationForm{
+    width: 70%;
+    margin: auto;
 }
