@@ -4,6 +4,7 @@ import SignUpForm from './SignUpForm';
 import AppInfoCard from './appInfoCard';
 import NavDrawer from './navDrawer';
 import CompanyRegistrationForm from './CompanyRegistrationForm';
+import CompanyDetails from './CompanyDetails';
 
 export {
     AppBarOpts,
@@ -11,5 +12,6 @@ export {
     SignUpForm,
     AppInfoCard,
     NavDrawer,
-    CompanyRegistrationForm
+    CompanyRegistrationForm,
+    CompanyDetails
 };

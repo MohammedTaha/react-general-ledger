@@ -10,7 +10,11 @@ const LedgerStates = (state = LedgerStateObj, action)=>{
         case LedgerActs.SET_REGISTERED_COMPANIES : 
             if(action.payload){
                 console.log("INSIDE IF ", action.payload);
-                newState.companies = action.payload;
+                newState.companies = [];
+                for(let cID in action.payload){
+                    action.payload[cID].uid = cID;
+                    newState.companies.push(action.payload[cID]);
+                }
             } else {
                 newState.companies = [];
             }

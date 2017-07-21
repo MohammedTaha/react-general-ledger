@@ -36,6 +36,13 @@ a{
 .rightAlignedElems{
     text-align: right;
 }
+.hintText{
+    font-size: 0.7em;
+    color: grey;
+}
+.cardMainHeading{
+    margin-bottom: 0.4em;
+}
 .cardSubHeading{
     font-style: italic;
     font-weight: normal;
@@ -104,9 +111,33 @@ a{
     margin-bottom: -5px;
     background-color: rgba(0,0,0,0.7) !important;
 }
-
-
 .companyRegistrationPage .companyRegistrationForm{
     width: 70%;
     margin: auto;
+}
+.container_registerNewCompany{
+    position: fixed;
+    bottom: 3vh;
+    right: 3vh;
+}
+.container_companyDetailsCards{
+    text-align: center;
+}
+.companyDetailsCard{
+    display: inline-block;
+    vertical-align: top;
+    min-height: 15em;
+    width: 23em;
+    margin: 2em;
+    text-align: left;
+    transition: all 250ms ease-in !important;
+}
+.companyDetailsCard:hover{
+    box-shadow: 0 0 15px 10px darkgray !important;
+    transition: all 200ms ease-in !important;
+}
+.aboutUsContainer{
+    width: 80%;
+    margin: auto;
+    text-align: justify;
 }
