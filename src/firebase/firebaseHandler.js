@@ -1,5 +1,5 @@
 import {firebaseAuth, firebaseDB} from './index';
-import {UIActs, AuthActs} from '../actions';
+import {UIActs, AuthActs, LedgerActs} from '../actions';
 
 const initEvents = ()=>{
 
@@ -63,10 +63,10 @@ export const firebaseUser = {
 
 export const firebaseCompanies = {
 
-    registerNewCompany : (companyDetails) => {
+    registerNewCompany : (uid, companyDetails) => {
         return (dispatch) => {
             dispatch(UIActs.showLoadingGIF()); 
-            firebaseDB.ref("/Companies").push(companyDetails)
+            firebaseDB.ref("/Companies/"+ uid).push(companyDetails)
                 .then((success)=>{
                     console.log("Company registration success ", success);
                     dispatch(UIActs.hideLoadingGIF()); 
@@ -77,6 +77,18 @@ export const firebaseCompanies = {
                     dispatch(UIActs.toggleNotificationMsgSnackbar({text : err.message, duration : 5000})); 
                 });
         }
+    },
+    getRegisteredCompanies (uid) {
+        return (dispatch) => {
+            dispatch(UIActs.showLoadingGIF()); 
+            firebaseDB.ref("/Companies/"+ uid)
+                .on("value", ( snapshot ) => {
+                    console.log( " snapshot ", snapshot.val());
+                    dispatch(UIActs.hideLoadingGIF());
+                    dispatch(LedgerActs.setRegisteredCompanies(snapshot.val()));
+                });
+        }
+
     }
 
 };
