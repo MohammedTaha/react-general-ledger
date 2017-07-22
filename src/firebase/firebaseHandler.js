@@ -89,6 +89,18 @@ export const firebaseCompanies = {
                 });
         }
 
+    },
+    getSelectedCompany (uid, companyID) {
+        return (dispatch) => {
+            dispatch(UIActs.showLoadingGIF()); 
+            firebaseDB.ref("/Companies/"+ uid + "/"+ companyID)
+                .on("value", ( snapshot ) => {
+                    console.log( " snapshot ", snapshot.val());
+                    dispatch(UIActs.hideLoadingGIF());
+                    dispatch(LedgerActs.setSelectedCompany(snapshot.val()));
+                });
+        }
+
     }
 
 };

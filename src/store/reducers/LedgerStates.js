@@ -1,7 +1,8 @@
 import {LedgerActs} from '../../actions'
 
 let LedgerStateObj = {
-    companies: []
+    companies: [],
+    selectedCompany : {}
 };
 
 const LedgerStates = (state = LedgerStateObj, action)=>{
@@ -9,7 +10,6 @@ const LedgerStates = (state = LedgerStateObj, action)=>{
     switch(action.type){
         case LedgerActs.SET_REGISTERED_COMPANIES : 
             if(action.payload){
-                console.log("INSIDE IF ", action.payload);
                 newState.companies = [];
                 for(let cID in action.payload){
                     action.payload[cID].uid = cID;
@@ -17,6 +17,14 @@ const LedgerStates = (state = LedgerStateObj, action)=>{
                 }
             } else {
                 newState.companies = [];
+            }
+            break;
+        case LedgerActs.SET_SELECTED_COMPANY : 
+            if(action.payload){
+                console.log("SELECTED COMPANY ++ ", action.payload)
+                newState.selectedCompany = action.payload;
+            } else {
+                newState.selectedCompany = {};
             }
             break;
         default:
