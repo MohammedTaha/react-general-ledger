@@ -17,6 +17,13 @@ class NewLedgerRecord extends Component {
         this.setState(newState);
     }
 
+    addNewEntry(){
+        this.props.registerNewLedgerEntry.bind(this, {...this.state});
+        setTimeout(()=>{
+            this.state = {particulars : "", cashIn: "", cashOut : ""};
+        }, 1000);
+    }
+
     render() {
         return (
             <tr>
@@ -35,6 +42,7 @@ class NewLedgerRecord extends Component {
                         value={this.state.cashIn}
                         onChange={this.handleChange.bind(this, 'cashIn')}
                         name="cashIn" 
+                        type="number"
                     />
                 </td>
                 <td className="cashCol">
@@ -42,10 +50,12 @@ class NewLedgerRecord extends Component {
                         value={this.state.cashOut}
                         onChange={this.handleChange.bind(this, 'cashOut')}
                         name="cashOut" 
+                        type="number"
+
                     />
                 </td>
                 <td>
-                    <IconButton onTouchTap={this.props.registerNewLedgerEntry.bind(this, this.state)}> <ContentAdd /> </IconButton>
+                    <IconButton onTouchTap={this.addNewEntry.bind(this)}> <ContentAdd /> </IconButton>
 
                 </td>
             </tr>

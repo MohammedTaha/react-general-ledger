@@ -26,11 +26,13 @@ class GeneralLedger extends Component{
 
     loggedInUserID = "";
     selectedCompanyID = "";
+    totals;
     constructor(props){
         super(props);
         if(props && props.match && props.match.params && props.match.params.companyID){
             this.selectedCompanyID = props.match.params.companyID
         }
+        this.totals = {cashIn : 0, cashOut: 0};
     }
 
 
@@ -52,12 +54,34 @@ class GeneralLedger extends Component{
 
     registerNewLedgerEntry(ledgerEntry){
         let newEntry = {...ledgerEntry};
+        newEntry.cashIn     = newEntry.cashIn ? parseInt(newEntry.cashIn) : 0;
+        newEntry.cashOut    = newEntry.cashOut ? parseInt(newEntry.cashOut) : 0;
+        // if(isNaN(newEntry.cashIn) || isNaN(newEntry.cashOut)){
+        //     return;
+        // }
         newEntry.userID     = this.props.AuthStates.signedInUser.uid; 
         newEntry.userName   = this.props.AuthStates.signedInUser.displayName; 
         this.props.updateLedgerEntry(this.selectedCompanyID, newEntry);
     }
 
+    getViewableDate(suggestedDate) {
+        if(!suggestedDate){
+            return "";
+        }
+        var dateToParse     = new Date(suggestedDate);
+        var month           = Number(dateToParse.getMonth() + 1);
+        var date            = Number(dateToParse.getDate());
+        var dateStr 	    = ((date < 10 ? ("0" + date) : date) + "/" + (month < 10 ? ("0" + month) : month) + "/" + dateToParse.getFullYear());
+        var hours           = Number(dateToParse.getHours());
+        var AM_PM           = (hours >= 12 ? "PM" : "AM");
+        hours               = (hours > 12) ? (hours - 12) : hours;
+        var mins            = Number(dateToParse.getMinutes());
+        var timeStr			= ((hours < 10 ? ("0" + hours) : hours) + ":" + (mins < 10 ? ("0" + mins) : mins) + " " + AM_PM);
+        return (dateStr + " ( " + timeStr + " )");
+    }
+
     render(){
+        this.totals = {cashIn : 0, cashOut : 0};
         return (
             <div className="companyRegistrationPage"> 
                 <custComponents.NavDrawer 
@@ -73,9 +97,13 @@ class GeneralLedger extends Component{
                             <span> {this.props.LedgerStates.selectedCompany.name} </span>
                         </div>
                         <div className="companyDetails">
-                            Phone Number : <span> {this.props.LedgerStates.selectedCompany.phoneNumber} </span> <br/>
-                            Email Address : <span> {this.props.LedgerStates.selectedCompany.emailAddress} </span> <br/>
-                            Address : <span> {this.props.LedgerStates.selectedCompany.address} </span> <br/>
+                            <table>
+                                <tbody>
+                                    <tr><td>Phone Number : </td><td className='readonlyCompanyDetail'>{this.props.LedgerStates.selectedCompany.phoneNumber}</td></tr>
+                                    <tr><td>Email Address : </td><td className='readonlyCompanyDetail'>{this.props.LedgerStates.selectedCompany.emailAddress}</td></tr>
+                                    <tr><td>Address : </td><td className='readonlyCompanyDetail'>{this.props.LedgerStates.selectedCompany.address}</td></tr>
+                                </tbody>
+                            </table>
                         </div>
                         
                         
@@ -94,12 +122,22 @@ class GeneralLedger extends Component{
                                     </tr>
                                 </thead>
                                 <tbody>
-
                                     {this.props.LedgerStates.ledger.map( (record, index) => {
+                                        
+                                        if(!index){
+                                            this.totals = {cashIn : 0, cashOut : 0};
+                                        }
+                                        if (record.cashIn) {
+                                            this.totals.cashIn += record.cashIn; 
+                                        }
+                                        if (record.cashOut) {
+                                            this.totals.cashOut += record.cashOut; 
+                                        }
+                                        
                                         return (
-                                            <tr> 
+                                            <tr key={"record_" + index}> 
                                                 <td>{index+1}</td>
-                                                <td>{record.particulars}</td>
+                                                <td>{this.getViewableDate(record.dt)}</td>
                                                 <td>{record.userName}</td>
                                                 <td>{record.particulars}</td>
                                                 <td>{record.cashIn}</td>
@@ -113,6 +151,17 @@ class GeneralLedger extends Component{
                                         sNo={this.props.LedgerStates.ledger.length +1} 
                                         userName={this.props.AuthStates.signedInUser.displayName} 
                                         />
+                                    <tr>
+                                        <td colSpan="4" className="cell_total"> TOTAL </td>    
+                                        <td> {this.totals.cashIn || "0"} </td>    
+                                        <td> {this.totals.cashOut || "0"} </td>    
+                                        <td> - </td>    
+                                    </tr>    
+                                    <tr>
+                                        <td colSpan="4" className="cell_total"> IN HAND </td>    
+                                        <td colSpan="2"> {(this.totals.cashIn - this.totals.cashOut) || "0"} </td>    
+                                        <td> - </td>    
+                                    </tr>    
                                 </tbody>
                             </table>
                         </div>

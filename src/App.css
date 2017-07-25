@@ -21,7 +21,7 @@ a{
     width: 100%;
     z-index: 2;
 }
-.AppBar{
+.AppBar, .table_ledgerTable th{
     background: #d4e4ef;
     background: -moz-linear-gradient(top, #d4e4ef 0%, #86aecc 100%);
     background: -webkit-linear-gradient(top, #d4e4ef 0%,#86aecc 100%);
@@ -159,27 +159,35 @@ a{
 .companyDetails{
     padding:0.2em;
 }
-.companyDetails span{
+.readonlyCompanyDetail{
+    padding:0.4em;
     display: inline-block;
-    padding: 0.2em 0.4em;
     border-bottom: 1px solid black;
     font-weight: 600;  
 }
 .table_ledgerTable{
-    width: 60em;
+    width: 75em;
     margin: 3em auto;
     border-spacing: 0px;
     border: 1px solid black;
 }
 .table_ledgerTable td, .table_ledgerTable th{
-    padding: 10px 0;
+    padding: 0.75em 0;
     text-align: center;
     border: 1px solid black;
+}
+.table_ledgerTable th{
+    padding: 1.2em 0.75em; 
 }
 .cashCol{
     max-width: 4em !important;
 }
 .cashCol>div{
     max-width: 4em !important;
+}
+.cell_total{
+    text-align: right !important;
+    padding-right: 20px !important;
+    font-weight: 600;
 }
 /*GL Page*/
