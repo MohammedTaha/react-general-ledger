@@ -8,7 +8,7 @@ class CompanyRegistrationForm extends Component {
 
     constructor(props){
         super(props);
-        this.state = {name : "", address : "", aboutUs : ""};
+        this.state = {name : "", address : "", aboutUs : "", emailAddress : "", phoneNumber : ""};
     }
 
     handleChange(fieldName, eve, newVal){
@@ -29,6 +29,22 @@ class CompanyRegistrationForm extends Component {
                         onChange={this.handleChange.bind(this, 'name')}
                         name="name"
                         floatingLabelText="Company Name" 
+                        fullWidth={true} 
+                    />
+                    <br />
+                    <TextField
+                        value={this.state.phoneNumber}
+                        onChange={this.handleChange.bind(this, 'phoneNumber')}
+                        name="phoneNumber"
+                        floatingLabelText="Phone Number" 
+                        fullWidth={true} 
+                    />
+                    <br />
+                    <TextField
+                        value={this.state.emailAddress}
+                        onChange={this.handleChange.bind(this, 'emailAddress')}
+                        name="emailAddress"
+                        floatingLabelText="Email Address" 
                         fullWidth={true} 
                     />
                     <br />

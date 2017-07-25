@@ -101,6 +101,29 @@ export const firebaseCompanies = {
                 });
         }
 
+    },
+    getLedgerOfSelectedCompany (companyID) {
+        return (dispatch) => {
+            dispatch(UIActs.showLoadingGIF()); 
+            firebaseDB.ref("/Ledgers/"+  companyID)
+                .on("value", ( snapshot ) => {
+                    console.log( " snapshot ", snapshot.val());
+                    dispatch(UIActs.hideLoadingGIF());
+                    dispatch(LedgerActs.setActiveLedger(snapshot.val()));
+                });
+        }
+
+    },
+
+    updateLedgerEntry (companyID, ledgerDetails) {
+        return (dispatch) => {
+            dispatch(UIActs.showLoadingGIF()); 
+            firebaseDB.ref("/Ledgers/"+  companyID).push(ledgerDetails)
+                .then(function(){
+                    dispatch(UIActs.hideLoadingGIF());
+                });
+        }
+
     }
 
 };

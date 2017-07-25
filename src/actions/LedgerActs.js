@@ -3,6 +3,7 @@ export default class LedgerActs {
     static REGISTER_NEW_COMPANY = "REGISTER_NEW_COMPANY";
     static SET_REGISTERED_COMPANIES = "SET_REGISTERED_COMPANIES";
     static SET_SELECTED_COMPANY = "SET_SELECTED_COMPANY";
+    static SET_ACTIVE_LEDGER    = "SET_ACTIVE_LEDGER";
 
     static registerNewCompany (companyDetails) {
         return {
@@ -21,6 +22,12 @@ export default class LedgerActs {
         return {
             type : this.SET_SELECTED_COMPANY,
             payload : company
+        }
+    }
+    static setActiveLedger (ledgerDetails) {
+        return {
+            type : this.SET_ACTIVE_LEDGER,
+            payload : ledgerDetails
         }
     }
 }

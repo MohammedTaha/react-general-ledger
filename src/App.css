@@ -142,3 +142,44 @@ a{
     margin: auto;
     text-align: justify;
 }
+
+
+/*GL Page*/
+.container_companyName{
+    font-size: 2em;
+    text-align: center;
+    font-weight: bold;
+}
+.container_companyName span{
+    display: inline-block;
+    padding: 1em 0.5em 0.2em 0.5em;
+    border-bottom: 3px solid black;
+    font-style: italic;  
+}
+.companyDetails{
+    padding:0.2em;
+}
+.companyDetails span{
+    display: inline-block;
+    padding: 0.2em 0.4em;
+    border-bottom: 1px solid black;
+    font-weight: 600;  
+}
+.table_ledgerTable{
+    width: 60em;
+    margin: 3em auto;
+    border-spacing: 0px;
+    border: 1px solid black;
+}
+.table_ledgerTable td, .table_ledgerTable th{
+    padding: 10px 0;
+    text-align: center;
+    border: 1px solid black;
+}
+.cashCol{
+    max-width: 4em !important;
+}
+.cashCol>div{
+    max-width: 4em !important;
+}
+/*GL Page*/

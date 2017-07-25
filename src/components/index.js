@@ -5,6 +5,7 @@ import AppInfoCard from './appInfoCard';
 import NavDrawer from './navDrawer';
 import CompanyRegistrationForm from './CompanyRegistrationForm';
 import CompanyDetails from './CompanyDetails';
+import NewLedgerRecord from './NewLedgerRecord';
 
 export {
     AppBarOpts,
@@ -13,5 +14,6 @@ export {
     AppInfoCard,
     NavDrawer,
     CompanyRegistrationForm,
-    CompanyDetails
+    CompanyDetails,
+    NewLedgerRecord
 };

@@ -2,7 +2,8 @@ import {LedgerActs} from '../../actions'
 
 let LedgerStateObj = {
     companies: [],
-    selectedCompany : {}
+    selectedCompany : {},
+    ledger : []
 };
 
 const LedgerStates = (state = LedgerStateObj, action)=>{
@@ -21,11 +22,17 @@ const LedgerStates = (state = LedgerStateObj, action)=>{
             break;
         case LedgerActs.SET_SELECTED_COMPANY : 
             if(action.payload){
-                console.log("SELECTED COMPANY ++ ", action.payload)
                 newState.selectedCompany = action.payload;
             } else {
                 newState.selectedCompany = {};
             }
+            break;
+        case LedgerActs.SET_ACTIVE_LEDGER : 
+            let activeLedger = [];
+            for(let key in action.payload){
+                activeLedger.push(action.payload[key]);
+            }
+            newState.ledger = activeLedger;
             break;
         default:
             break;
